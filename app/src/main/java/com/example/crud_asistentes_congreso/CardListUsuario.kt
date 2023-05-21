@@ -4,6 +4,7 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Card
+import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -21,14 +22,15 @@ fun CardListUsuario(
     funMontoPagado: (String) -> Unit,
     funTextButton: (String) -> Unit,
     funIsEditando: (Boolean) -> Unit,
+
+    funBorrarUsuario: (String) -> Unit,
     usuario: Usuario,
-    funBorrarUsuario: (String) -> Unit
 ) {
     Card(
         modifier = Modifier
             .fillMaxWidth()
             .padding(vertical = 8.dp),
-        elevation = 8.dp
+        elevation = CardDefaults.cardElevation(defaultElevation = 8.dp)
     ) {
         Column(
             modifier = Modifier

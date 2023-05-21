@@ -6,6 +6,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
+import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -15,6 +16,7 @@ import androidx.compose.ui.graphics.StrokeCap
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
 
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun Formulario(
     nombre: String,
@@ -110,7 +112,7 @@ fun Formulario(
     )
     Spacer(modifier = Modifier.padding(vertical = 8.dp))
     Button(modifier = Modifier.fillMaxWidth(),
-        colors = ButtonDefaults.buttonColors(backgroundColor = Color.DarkGray),
+        colors = ButtonDefaults.buttonColors(Color.DarkGray),
         onClick = {
             if (isEditando) {
                 editarUsuario(nombre, fecha, tipoSangre, telefono, email, montoPagado, listaUsuarios)

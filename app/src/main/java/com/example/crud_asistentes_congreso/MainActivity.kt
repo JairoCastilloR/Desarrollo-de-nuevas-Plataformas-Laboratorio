@@ -5,10 +5,13 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.items
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
@@ -44,7 +47,7 @@ class MainActivity : ComponentActivity() {
 
 @Composable
 
-fun ScreenCrud(listaUsuario: MutableList<Usuario>){
+fun ScreenCrud(listaUsuarios: MutableList<Usuario>){
     var fullnombre by remember { mutableStateOf("") }
     var registrationDate by remember { mutableStateOf( "") }
     var bloodtype by remember { mutableStateOf("") }
@@ -53,6 +56,7 @@ fun ScreenCrud(listaUsuario: MutableList<Usuario>){
     var amountPaid by remember { mutableStateOf("") }
 
     var isediting by remember {  mutableStateOf(false)  }
+    var textButton by remember { mutableStateOf("Agregar Usuario") }
     
     
     
@@ -62,18 +66,30 @@ fun ScreenCrud(listaUsuario: MutableList<Usuario>){
         .padding(12.dp)) {
         Column(modifier = Modifier.fillMaxWidth().fillMaxHeight()) {
             Formulario(
-                nombre = nombre,
-                funNombre = { nombre = it },
+                nombre = fullnombre,
+                funNombre = { fullnombre = it },
+                fecha = registrationDate,
+                funFecha = { registrationDate = it },
+                tipoSangre = bloodtype,
+                funTipoSangre = { bloodtype = it },
+                telefono = phone,
+                funTelefono = { phone = it },
                 email = email,
                 funEmail = { email = it },
+                montoPagado = amountPaid,
+                funMontoPagado = { amountPaid = it },
                 isEditando = isediting,
-                funIsEditando = { isEditando = false },
+                funIsEditando = { isediting = false },
                 textButton = textButton,
                 funTextButton = { textButton = it },
                 listaUsuarios = listaUsuarios,
                 funResetCampos = {
-                    nombre = ""
+                    fullnombre = ""
+                    registrationDate = ""
+                    bloodtype = ""
+                    phone = ""
                     email = ""
+                    amountPaid = ""
                 }
             )
             Column(
@@ -82,15 +98,22 @@ fun ScreenCrud(listaUsuario: MutableList<Usuario>){
                 LazyColumn(
                     contentPadding = PaddingValues(horizontal = 16.dp, vertical = 8.dp)
                 ) {
+
                     items(listaUsuarios) { usuario ->
 
-                        CardUsuario(
-                            funNombre = { nombre = it },
+                        CardListUsuario(
+                            funNombre = { fullnombre = it },
+
+                            funFecha = { registrationDate = it },
+                            funTipoSangre =  { bloodtype = it },
+                            funTelefono = { phone = it },
                             funEmail =  { email = it },
-                            usuario = usuario,
+                            funMontoPagado =  { amountPaid = it },
+
                             funTextButton = { textButton = it },
-                            funIsEditando = { isEditando = it },
-                            funBorrarUsuario = { borrarUsuario(it, listaUsuarios) }
+                            funIsEditando = { isediting = it },
+                            funBorrarUsuario = { borrarUsuario(it, listaUsuarios) },
+                            usuario = usuario,
                         )
                     }
                 }
