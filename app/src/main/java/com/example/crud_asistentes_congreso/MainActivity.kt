@@ -99,21 +99,25 @@ fun ScreenCrud(listaUsuario: MutableList<Usuario>){
     }
 }
 
-fun agregarUsuario(nombre: String, email: String, listaUsuarios: MutableList<Usuario>) {
-    listaUsuarios.add(Usuario(nombre, email))
+fun agregarUsuario(nombre: String, fecha:String,tipoSangre:String,telefono:String,email: String,montoPagado:String, listaUsuarios: MutableList<Usuario>) {
+    listaUsuarios.add(Usuario(nombre, fecha, tipoSangre, telefono, email, montoPagado))
 }
 
-fun editarUsuario(nombre: String, email: String, listaUsuarios: MutableList<Usuario>) {
+fun editarUsuario(nombre: String, fecha:String,tipoSangre:String,telefono:String,email: String,montoPagado:String, listaUsuarios: MutableList<Usuario>) {
     listaUsuarios.forEach { usuario ->
-        if (usuario.nombre == nombre) {
+        if (usuario.fullName == nombre) {
+            usuario.registrationDate = fecha
+            usuario.bloodType = tipoSangre
+            usuario.phone = telefono
             usuario.email = email
+            usuario.amountPaid = montoPagado
         }
     }
 }
 
 fun borrarUsuario(nombre: String, listaUsuarios: MutableList<Usuario>) {
     listaUsuarios.forEach { usuario ->
-        if (usuario.nombre == nombre) {
+        if (usuario.fullName == nombre) {
             listaUsuarios.remove(usuario)
         }
     }

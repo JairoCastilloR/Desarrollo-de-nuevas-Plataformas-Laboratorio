@@ -57,6 +57,39 @@ fun Formulario(
     Spacer(modifier = Modifier.padding(vertical = 8.dp))
     OutlinedTextField(
         modifier = Modifier.fillMaxWidth(),
+        value = fecha,
+        keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Text),
+        singleLine = true,
+        maxLines = 1,
+        onValueChange = { funFecha(it) },
+        label = { Text(text = "Fecha Registrada") },
+        enabled = !isEditando
+    )
+    Spacer(modifier = Modifier.padding(vertical = 8.dp))
+    OutlinedTextField(
+        modifier = Modifier.fillMaxWidth(),
+        value = tipoSangre,
+        keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Text),
+        singleLine = true,
+        maxLines = 1,
+        onValueChange = { funTipoSangre(it) },
+        label = { Text(text = "Tipo de Sangre") },
+        enabled = !isEditando
+    )
+    Spacer(modifier = Modifier.padding(vertical = 8.dp))
+    OutlinedTextField(
+        modifier = Modifier.fillMaxWidth(),
+        value = telefono,
+        keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Text),
+        singleLine = true,
+        maxLines = 1,
+        onValueChange = { funTelefono(it) },
+        label = { Text(text = "Telefono") },
+        enabled = !isEditando
+    )
+    Spacer(modifier = Modifier.padding(vertical = 8.dp))
+    OutlinedTextField(
+        modifier = Modifier.fillMaxWidth(),
         value = email,
         keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Email),
         singleLine = true,
@@ -65,16 +98,27 @@ fun Formulario(
         label = { Text(text = "Email") }
     )
     Spacer(modifier = Modifier.padding(vertical = 8.dp))
+    OutlinedTextField(
+        modifier = Modifier.fillMaxWidth(),
+        value = montoPagado,
+        keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Text),
+        singleLine = true,
+        maxLines = 1,
+        onValueChange = { funMontoPagado(it) },
+        label = { Text(text = "Monto pagado") },
+        enabled = !isEditando
+    )
+    Spacer(modifier = Modifier.padding(vertical = 8.dp))
     Button(modifier = Modifier.fillMaxWidth(),
         colors = ButtonDefaults.buttonColors(backgroundColor = Color.DarkGray),
         onClick = {
             if (isEditando) {
-                editarUsuario(nombre, email, listaUsuarios)
+                editarUsuario(nombre, fecha, tipoSangre, telefono, email, montoPagado, listaUsuarios)
                 funTextButton("Agregar Usuario")
                 funIsEditando()
 
             } else {
-                agregarUsuario(nombre, email, listaUsuarios)
+                agregarUsuario(nombre, fecha, tipoSangre, telefono, email, montoPagado, listaUsuarios)
             }
             funResetCampos()
         }
